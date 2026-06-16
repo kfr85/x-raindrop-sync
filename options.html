@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>X → Raindrop 設定</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 16px;
+      background: #0f1117;
+      color: #e7e9ea;
+    }
+    h1 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+    .subtitle { font-size: 14px; color: #71767b; margin-bottom: 28px; }
+    .field { margin-bottom: 20px; }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .hint { font-size: 12px; color: #71767b; margin-bottom: 6px; }
+    .hint a { color: #1d9bf0; }
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #2f3336;
+      background: #1d2433;
+      color: #e7e9ea;
+      font-size: 14px;
+    }
+    input:focus, select:focus { outline: none; border-color: #1d9bf0; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-primary { background: #1d9bf0; color: white; }
+    .btn-primary:hover { background: #1a8cd8; }
+    .btn-secondary { background: #2f3336; color: #e7e9ea; }
+    .btn-secondary:hover { background: #3a3f45; }
+    .msg {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: none;
+    }
+    .msg.success { background: #0d2e1e; color: #00ba7c; display: block; }
+    .msg.error { background: #2d1218; color: #f4212e; display: block; }
+    hr { border: none; border-top: 1px solid #2f3336; margin: 24px 0; }
+    .danger-zone h2 { font-size: 14px; font-weight: 600; color: #f4212e; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <h1>X Likes → Raindrop 設定</h1>
+  <p class="subtitle">X(Twitter)のいいねを自動的にRaindropに保存します</p>
+
+  <div class="field">
+    <label for="token">Raindrop.io APIトークン</label>
+    <p class="hint">
+      <a href="https://app.raindrop.io/settings/integrations" target="_blank">Raindrop設定 → 統合 → テストトークン</a> から取得できます
+    </p>
+    <input type="password" id="token" placeholder="APIトークンを入力..." autocomplete="off" />
+  </div>
+
+  <div class="field">
+    <label for="collection">保存先コレクション</label>
+    <p class="hint">未選択の場合は「未整理」に保存されます。トークン入力後に「コレクション取得」で一覧を更新できます。</p>
+    <select id="collection">
+      <option value="-1">未整理（デフォルト）</option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" id="save-btn">保存</button>
+    <button class="btn-secondary" id="test-btn">接続テスト</button>
+    <button class="btn-secondary" id="load-btn">コレクション取得</button>
+  </div>
+
+  <div class="msg" id="message"></div>
+
+  <hr />
+  <div class="danger-zone">
+    <h2>データ管理</h2>
+    <p class="hint" style="margin-bottom:8px">同期履歴をクリアすると、過去にいいねしたツイートが再度Raindropに追加される場合があります。</p>
+    <button class="btn-secondary" id="clear-btn">同期履歴をクリア</button>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

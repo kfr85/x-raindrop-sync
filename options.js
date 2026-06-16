@@ -87,6 +87,6 @@ loadBtn.addEventListener('click', async () => {
 });
 
 clearBtn.addEventListener('click', async () => {
-  await chrome.storage.local.remove('synced_urls');
-  showMsg('同期履歴をクリアしました', 'success');
+  await chrome.storage.local.remove(['synced_likes', 'synced_bookmarks']);
+  showMsg('同期履歴をクリアしました（いいね・ブックマーク両方）', 'success');
 });

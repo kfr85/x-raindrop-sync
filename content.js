@@ -35,7 +35,9 @@
   document.addEventListener(
     'click',
     (e) => {
-      const btn = e.target.closest('[data-testid="like"]');
+      const likeBtn = e.target.closest('[data-testid="like"]');
+      const bookmarkBtn = e.target.closest('[data-testid="bookmark"]');
+      const btn = likeBtn || bookmarkBtn;
       if (!btn) return;
 
       const article = btn.closest('article');
@@ -46,11 +48,9 @@
 
       const text = getTweetText(article);
       const author = getAuthor(article);
+      const type = likeBtn ? 'TWEET_LIKED' : 'TWEET_BOOKMARKED';
 
-      chrome.runtime.sendMessage({
-        type: 'TWEET_LIKED',
-        payload: { url, text, author },
-      });
+      chrome.runtime.sendMessage({ type, payload: { url, text, author } });
     },
     true
   );
